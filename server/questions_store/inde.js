@@ -1,4 +1,5 @@
 const questionsStoreDSA = {
+  category : "DSA",
   textImageQuestions: [],
   onlyTextQuestions: [
     {
@@ -27,6 +28,7 @@ const questionsStoreDSA = {
 };
 
 const questionStoreAptitude = {
+  category : "APTITUDE",
   textImageQuestions: [],
   onlyTextQuestions: [
     {

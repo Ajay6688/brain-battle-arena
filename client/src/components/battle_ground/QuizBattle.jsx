@@ -35,7 +35,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
     } else {
       console.log("wrong");
     }
-
+    
     setButtonBackground({ background: "#a0fab8" });
   };
 
@@ -116,7 +116,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
               marginLeft: "259px",
             }}
           >
-            IQ test game
+            Brain Battle Arena
           </div>
           <div className="mainGameTopicChild">
             {!endOfGame && (
@@ -189,11 +189,15 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
               style={{
                 fontFamily: "'Bai Jamjuree', sans-serif",
                 color: "#f20f0f",
-                border : "1px solid black",
-                padding : "9px"
+                border: "1px solid black",
+                padding: "9px",
               }}
             >
-            {score > isWinnerData.score ? "You Won" : score === isWinnerData.score ? "It's a Tie" : "You Lost"}
+              {score > isWinnerData.score
+                ? "You Won"
+                : score === isWinnerData.score
+                ? "It's a Tie"
+                : "You Lost"}
             </h2>
             <h3
               style={{
@@ -226,6 +230,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
           }}
         >
           {!endOfGame && (
+            // <div className="joinChatContainer">
             <div className="joinChatContainer">
               <button
                 type="submit"
@@ -234,7 +239,9 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
               >
                 Submit
               </button>
-              {user1Submitted && <p>waiting for opponent to submit the answer</p>}
+              {user1Submitted && (
+                <p>waiting for opponent to submit the answer</p>
+              )}
             </div>
           )}
         </span>
