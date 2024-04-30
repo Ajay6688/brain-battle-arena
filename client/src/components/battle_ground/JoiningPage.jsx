@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { useState } from "react";
 import { BattleGroundPage } from "./BattleGroundPage";
 
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect("http://localhost:5000");
 
 export const JoiningPage = () => {
   const [username, setUsername] = useState("");
