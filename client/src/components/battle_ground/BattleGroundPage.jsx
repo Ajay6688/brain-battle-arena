@@ -17,6 +17,17 @@ export const BattleGroundPage = ({
   const [isReady, setIsReady] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
 
+  window.onbeforeunload = (event) => {
+    const e = event || window.event;
+    // Cancel the event
+    e.preventDefault();
+    if (e) {
+      console.log("inside if e")
+      e.returnValue = 'you will have to recreate the room on reload'; // Legacy method for cross browser support
+    }
+    return 'you will have to recreate the room on reload'; // Legacy method for cross browser support
+  };
+
   const handleStartGame = () => {
     console.log("is ready : ", isReady);
     if (isReady) {
@@ -124,8 +135,6 @@ export const BattleGroundPage = ({
                       <img src={player2image} alt="player 2 img" />
                     </>
                   )}
-                  {/* <h1>{}</h1>
-                  <img src={player2image} alt="player 2 img" /> */}
                 </div>
               </div>
               <div className="startButtonContainer">
@@ -147,31 +156,6 @@ export const BattleGroundPage = ({
               </div>
             </div>
           </section>
-          {/* -------------------------------------------------------------------------------------------------------- */}
-          {/* <div className="active-users">
-            <p>Room Id : {room.room}</p>
-            <br />
-            <p>Active Users:</p>
-            <ul>
-              {activeUsersList.map((user, index) => (
-                <li key={index}>{user.username}</li>
-              ))}
-            </ul>
-            {activeUsersList.length !== 2 && (
-              <p>waiting for the opponent to join...</p>
-            )}
-          </div>
-          <div className="joinChatContainer">
-            {isHost ? (
-              <button onClick={handleStartGame} style={startButtonBackground}>
-                Start Game
-              </button>
-            ) : (
-              <button onClick={handleReadyGame} style={startButtonBackground}>
-                Ready
-              </button>
-            )}
-          </div> */}
         </>
       )}
       {showQuiz && (
