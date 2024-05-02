@@ -1,7 +1,8 @@
-const questionsStoreDSA = {
-  category : "DSA",
+export const questionsStoreDSA = {
+  storeId: 1,
+  category: "DSA",
   textImageQuestions: [],
-  onlyTextQuestions: [
+  questions: [
     {
       type: "TEXT",
       time: 35,
@@ -12,8 +13,6 @@ const questionsStoreDSA = {
       D: "Siva Sai",
       ans: "A",
     },
-  ],
-  patternQuestions: [
     {
       type: "PATTERN",
       time: 30,
@@ -27,10 +26,11 @@ const questionsStoreDSA = {
   ],
 };
 
-const questionStoreAptitude = {
-  category : "APTITUDE",
+export const questionStoreAptitude = {
+  storeId: 2,
+  category: "APTITUDE",
   textImageQuestions: [],
-  onlyTextQuestions: [
+  questions: [
     {
       type: "TEXT",
       time: 35,
@@ -41,8 +41,6 @@ const questionStoreAptitude = {
       D: "Siva Sai",
       ans: "A",
     },
-  ],
-  patternQuestions: [
     {
       type: "PATTERN",
       time: 30,

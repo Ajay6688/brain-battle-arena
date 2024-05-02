@@ -1,15 +1,24 @@
-import "../../../src/App.css";
 import "../../styles/JoiningPage.css";
 import io from "socket.io-client";
 import { useState } from "react";
 import { BattleGroundPage } from "./BattleGroundPage";
+import { Link, useParams } from "react-router-dom";
 
-const socket = io.connect("http://13.127.235.89:5000");
+// const socket = io.connect("http://13.127.235.89:5000");
+const socket = io.connect("http://localhost:5000");
 
 export const JoiningPage = () => {
+  const { category } = useParams();
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState({ room: "", username: "" });
   const [showChat, setShowChat] = useState(false);
+  const [isCreateRoom, setIsCreateRoom] = useState(true);
+  const [categoryId , setCategoryId] = useState();
+ 
+  const categoryListMap =  {
+    0 : "DSA",
+    1 : "Aptitude"
+  }
 
   const joinRoom = () => {
     socket.emit("join_room", { room: room, username: username });
@@ -20,10 +29,8 @@ export const JoiningPage = () => {
 
   const generateRoomId = () => {
     // Generate a random room ID or use any unique identifier logic
-    return Math.random().toString(36).substring(7);
+    return Math.random().toString(36).substring(7) + category;
   };
-
-  const [isCreateRoom, setIsCreateRoom] = useState(true);
 
   const toggleCreateRoom = () => {
     setIsCreateRoom(false);
@@ -65,6 +72,11 @@ export const JoiningPage = () => {
               {isCreateRoom ? (
                 <div id="login-form">
                   <form>
+                    <Link to={"/category"}>
+                    <div className="choose-category-container">
+                      {category ? categoryListMap[category] : "Choose category"}
+                    </div>
+                    </Link>
                     <input
                       type="text"
                       placeholder="Enter your name"
@@ -82,7 +94,10 @@ export const JoiningPage = () => {
                     <button
                       type="submit"
                       className="btn login"
-                      onClick={joinRoom}
+                      onClick={()=>{
+                        setCategoryId(null);
+                        joinRoom();
+                      }}
                     >
                       Create A Room
                     </button>
@@ -113,6 +128,7 @@ export const JoiningPage = () => {
                       placeholder="Enter Room Id"
                       required
                       onChange={(event) => {
+                        setCategoryId(event.target.value.trim().charAt(event.target.value.trim().length - 1));
                         setRoom({
                           room: event.target.value.trim(),
                           username: username,
@@ -135,7 +151,13 @@ export const JoiningPage = () => {
             </div>
           </div>
         ) : (
-          <BattleGroundPage socket={socket} username={username} room={room} />
+          <BattleGroundPage
+            socket={socket}
+            username={username}
+            room={room}
+            questionsCategory={category}
+            categoryId = {categoryId}
+          />
         )}
       </div>
     </>

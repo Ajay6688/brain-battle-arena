@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
+import "../../styles/BattleGroundPage.css";
 import QuizBattle from "./QuizBattle";
+import player1image from "../../assets/images/player1img.png";
+import player2image from "../../assets/images/player2img.png";
 
-export const BattleGroundPage = ({ socket, username, room }) => {
+export const BattleGroundPage = ({
+  socket,
+  username,
+  room,
+  questionsCategory,
+  categoryId,
+}) => {
   const [activeUsersList, setActiveUsersList] = useState([]);
   const [startButtonBackground, setStartButtonBackground] = useState({});
   const [isHost, setIsHost] = useState(false);
@@ -82,11 +91,64 @@ export const BattleGroundPage = ({ socket, username, room }) => {
     };
   }, [socket]);
 
+  // console.log(activeUsersList[0].username);
+
   return (
     <>
       {!showQuiz && (
         <>
-          <div className="active-users">
+          <section className="player-name">
+            <div className="in-game-name">
+              <div className="navbarrr">
+                <h3>{/* Q 3/3 */}</h3>
+                <h1>Room ID: {room.room}</h1>
+                <h4>{/* Time :00 */}</h4>
+              </div>
+              <div className="main-section">
+                <div className="left-side-player">
+                  <h1>{username}</h1>
+                  <img src={player1image} alt="player 1 img" />
+                </div>
+                <div className="ssspan">
+                  <span>
+                    {activeUsersList.length !== 2 && (
+                      <p>waiting for the opponent to join...</p>
+                    )}
+                  </span>
+                </div>
+
+                <div className="right-side-player">
+                  {activeUsersList.length === 2 && (
+                    <>
+                      <h1>{activeUsersList[1].username}</h1>
+                      <img src={player2image} alt="player 2 img" />
+                    </>
+                  )}
+                  {/* <h1>{}</h1>
+                  <img src={player2image} alt="player 2 img" /> */}
+                </div>
+              </div>
+              <div className="startButtonContainer">
+                {isHost ? (
+                  <button
+                    onClick={handleStartGame}
+                    style={startButtonBackground}
+                  >
+                    Start Game
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleReadyGame}
+                    style={startButtonBackground}
+                  >
+                    Ready
+                  </button>
+                )}
+              </div>
+            </div>
+          </section>
+          {/* -------------------------------------------------------------------------------------------------------- */}
+          {/* <div className="active-users">
             <p>Room Id : {room.room}</p>
             <br />
             <p>Active Users:</p>
@@ -109,7 +171,7 @@ export const BattleGroundPage = ({ socket, username, room }) => {
                 Ready
               </button>
             )}
-          </div>
+          </div> */}
         </>
       )}
       {showQuiz && (
@@ -118,6 +180,8 @@ export const BattleGroundPage = ({ socket, username, room }) => {
           username={username}
           room={room}
           isHost={isHost}
+          questionsCategory={questionsCategory}
+          categoryId={categoryId}
         />
       )}
     </>

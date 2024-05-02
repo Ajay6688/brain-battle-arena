@@ -5,7 +5,7 @@ import TextMCQ from "./textMCQ_game";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const QuizBattle = ({ socket, username, room, isHost }) => {
+const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categoryId}) => {
   const [quesArr, setQuesArr] = useState([{}]);
   const [quesIndex, setQuesIndex] = useState(0);
   const [quesNumber, setQuesNumber] = useState(1);
@@ -29,7 +29,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
       isHost: isHost,
     });
 
-    if (userAns === quesArr[quesIndex].ans) {
+    if (userAns === quesArr[quesIndex]?.ans) {
       console.log("correct");
       setScore((prev) => prev + 1);
     } else {
@@ -41,20 +41,29 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
 
   // this will run only once so will initialize the
   useEffect(() => {
-    socket.emit("send_questions", { room: room.room });
+    console.log("from route " ,questionsCategory);
+    console.log("categoryId ",categoryId);
+    let category = null; 
+    if(categoryId !== null){
+      category = categoryId;
+    }else{
+      category = questionsCategory;
+    }
+    console.log("final category " ,category)
+    socket.emit("send_questions", { room: room.room  , category : category});
   }, []);
 
   useEffect(() => {
     if (user1Submitted && user2Submitted) {
-      if (quesIndex < quesArr.length - 1) {
+      if (quesIndex < quesArr?.length - 1) {
         setQuesIndex((prev) => prev + 1);
         setQuesNumber((prev) => prev + 1);
-        setTimer(quesArr[quesIndex + 1].time); // reset timer
+        setTimer(quesArr[quesIndex + 1]?.time); // reset timer
         setButtonBackground({});
       }
       setUser1Submitted(false);
       setUser2Submitted(false);
-      if (quesIndex === quesArr.length - 1) {
+      if (quesIndex === quesArr?.length - 1) {
         socket.emit("send_score", {
           score: score,
           username: username,
@@ -145,10 +154,10 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
               }}
             >
               <h2>
-                Q {quesNumber}/{quesArr.length}
+                Q {quesNumber}/{quesArr?.length}
               </h2>
             </div>
-            {quesArr[quesIndex].type === "PATTERN" ? (
+            {quesArr[quesIndex]?.type === "PATTERN" ? (
               <PatternGame
                 ques={quesArr[quesIndex]}
                 setQuesIndex={setQuesIndex}
@@ -205,8 +214,8 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
                 color: "#0490c7",
               }}
             >
-              Your Score is : {score} / {quesArr.length} <br />
-              Your Opponent score is : {isWinnerData.score} / {quesArr.length}
+              Your Score is : {score} / {quesArr?.length} <br />
+              Your Opponent score is : {isWinnerData.score} / {quesArr?.length}
             </h3>
             <div
               style={{
@@ -216,7 +225,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
                 alignItems: "center",
               }}
             ></div>
-            <button className="btn signup" onClick={() => navigate("/")}>
+            <button className="btn signup" onClick={() => {window.location.reload()}}>
               Home
             </button>
           </div>
@@ -227,6 +236,7 @@ const QuizBattle = ({ socket, username, room, isHost }) => {
             display: "flex",
             justifyContent: "center",
             marginTop: "10px",
+            width : "100%"
           }}
         >
           {!endOfGame && (

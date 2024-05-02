@@ -1,0 +1,240 @@
+/* #56B945 #A1F9B9 */
+body {
+  margin: 0px;
+}
+
+:root {
+  --commont-font: "Poppins", sans-serif;
+}
+
+.startButtonContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.startButtonContainer button {
+  width: 225px;
+  height: 50px;
+  margin: 7px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  background: #57b846;
+  color: #fff;
+  cursor: pointer;
+}
+
+.startButtonContainer button:hover{
+    background: #2e7d32;
+}
+
+section {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(#56b945, #beffb3);
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: green;
+  position: relative;
+  background-image: url(../assets//icons/circle-scatter-jkdu7dt.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main {
+  height: 80vh;
+  width: 60vw;
+  background: rgba(255, 255, 255, 0.866);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.439);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+/* .main div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--commont-font);
+  color: white;
+} */
+
+@keyframes glowtext {
+  from {
+    scale: 1;
+  }
+
+  to {
+    scale: 1.1;
+  }
+}
+
+.first-section h1 {
+  animation: alternate ease-in-out 0.5s infinite glowtext;
+  color: #56b945;
+  font-size: 50px;
+}
+
+@media (max-width: 460px) {
+  .first-section h1 {
+    font-size: 18px;
+  }
+}
+
+.main-contant {
+  height: 45vh;
+  width: 25vw;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.13);
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding-top: 10px;
+}
+
+/* secnd-section players name */
+.player-name {
+  background-image: url(../assets//icons/Group10.svg);
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+}
+
+.in-game-name {
+  height: 90vh;
+  width: 70vw;
+  border-radius: 30px;
+  background: #ffffffc0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.439);
+}
+
+.navbarrr {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 80px 0px 80px;
+  height: auto;
+}
+
+.navbarrr h4 {
+  font-size: 20px;
+  color: red;
+  font-family: var(--commont-font);
+}
+
+.navbarrr h3 {
+  font-size: 20px;
+  color: #56b945;
+  font-family: var(--commont-font);
+}
+
+.navbarrr h1 {
+  font-size: 40px;
+  color: #56b945;
+  font-family: var(--commont-font);
+
+  animation: gloww alternate 1s infinite;
+}
+
+@keyframes gloww {
+  from {
+    text-shadow: 0 1px 3px #61c84e, 0 1px 3px #64cf51, 0 1px 3px #60c44f;
+  }
+
+  to {
+  }
+}
+
+.main-section {
+  display: flex;
+  justify-content: space-around;
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: relative;
+}
+
+.left-side-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-side-player h1 {
+  color: #56b945;
+  font-family: var(--commont-font);
+  text-transform: capitalize;
+}
+
+.right-side-player h1 {
+  color: #56b945;
+  margin-left: 31px;
+  font-family: var(--commont-font);
+  text-transform: capitalize;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.right-side-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-side-player img {
+  height: 400px;
+  animation: alternate forwards 0.5s ltor ease-in-out;
+}
+
+.right-side-player img {
+  height: 400px;
+  animation: alternate forwards 0.5s rtol ease-in-out;
+  transition: 1s;
+  z-index: 333;
+}
+
+@keyframes ltor {
+  0% {
+    margin-left: -20px;
+  }
+
+  100% {
+    margin-left: 20px;
+  }
+}
+
+@keyframes rtol {
+  0% {
+    margin-right: -20px;
+  }
+
+  100% {
+    margin-right: 20px;
+  }
+}
+
+.ssspan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  font-family: var(--commont-font);
+  font-size: large;
+  width: max-content;
+  animation: alternate infinite 0.5s glowtext;
+}
