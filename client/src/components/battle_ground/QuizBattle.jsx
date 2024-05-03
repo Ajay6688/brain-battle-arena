@@ -18,8 +18,6 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
   const [isWinnerData, setIsWinnerData] = useState({});
   const [buttonBackground, setButtonBackground] = useState({});
 
-  const navigate = useNavigate();
-
   const handleSubmitClick = () => {
     setUser1Submitted(true);
     socket.emit("submit_answer", {
@@ -225,7 +223,7 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
                 alignItems: "center",
               }}
             ></div>
-            <button className="btn signup" onClick={() => {window.location.reload()}}>
+            <button className="startButtonContainer" onClick={() => {window.location.reload()}}>
               Home
             </button>
           </div>

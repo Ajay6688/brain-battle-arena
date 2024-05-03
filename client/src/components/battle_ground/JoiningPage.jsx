@@ -18,11 +18,6 @@ export const JoiningPage = () => {
   const [categoryId, setCategoryId] = useState();
   const [category , setCategory] = useState("");
 
-  const categoryListMap = {
-    0: "DSA",
-    1: "Aptitude",
-  };
-
   const joinRoom = () => {
     socket.emit("join_room", { room: room, username: username });
     setShowChat(true);

@@ -28,8 +28,8 @@ body {
   cursor: pointer;
 }
 
-.startButtonContainer button:hover{
-    background: #2e7d32;
+.startButtonContainer button:hover {
+  background: #2e7d32;
 }
 
 section {
@@ -50,8 +50,10 @@ section {
 }
 
 .main {
-  height: 80vh;
-  width: 60vw;
+  padding-left: 14%;
+  padding-top: 2%;
+  padding-bottom: 6%;
+  padding-right: 14%;
   background: rgba(255, 255, 255, 0.866);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.439);
