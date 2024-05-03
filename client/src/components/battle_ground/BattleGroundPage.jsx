@@ -117,7 +117,11 @@ export const BattleGroundPage = ({
               </div>
               <div className="main-section">
                 <div className="left-side-player">
-                  <h1>{username}</h1>
+                  <h1>{activeUsersList.map((item , index)=>{
+                    if(index === 0){
+                      return item.username;
+                    }
+                  })}</h1>
                   <img src={player1image} alt="player 1 img" />
                 </div>
                 <div className="ssspan">
