@@ -10,12 +10,13 @@ const socket = io.connect("http://13.127.235.89:5000");
 // const socket = io.connect("http://localhost:5000");
 
 export const JoiningPage = () => {
-  const { category } = useParams();
+  // const { category } = useParams();
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState({ room: "", username: "" });
   const [showChat, setShowChat] = useState(false);
   const [isCreateRoom, setIsCreateRoom] = useState(true);
   const [categoryId, setCategoryId] = useState();
+  const [category , setCategory] = useState("");
 
   const categoryListMap = {
     0: "DSA",
@@ -51,7 +52,7 @@ export const JoiningPage = () => {
               <div className="first-section">
                 <h1>Brain Battle Arena</h1>
               </div>
-              <div>
+              <div style={{ position: "relative" }}>
                 <div className="form-modal">
                   <div className="form-toggle">
                     <button
@@ -79,13 +80,23 @@ export const JoiningPage = () => {
                   {isCreateRoom ? (
                     <div id="login-form">
                       <form>
-                        <Link to={"/category"} style={{textDecoration : "none" , color : "inherit"}}>
+                        {/* <Link to={"/category"} style={{textDecoration : "none" , color : "inherit"}}>
                           <div className="choose-category-container">
                             {category
                               ? categoryListMap[category]
                               : "Choose category"}
                           </div>
-                        </Link>
+                        </Link> */}
+                        <select
+                          name="cars"
+                          className="choose-category-container"
+                          defaultValue="Choose Category"
+                          onChange={(event)=>setCategory(event.target.value)}
+                        >
+                          <option disabled>Choose Category</option>
+                          <option value="0">DSA</option>
+                          <option value="1">Aptitude</option>
+                        </select>
                         <input
                           type="text"
                           placeholder="Enter your name"
