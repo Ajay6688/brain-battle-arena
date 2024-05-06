@@ -4,7 +4,6 @@ import "../../styles/BattleGroundPage.css";
 import io from "socket.io-client";
 import { useState } from "react";
 import { BattleGroundPage } from "./BattleGroundPage";
-import { Link, useParams } from "react-router-dom";
 
 const socket = io.connect("http://13.127.235.89:5000");
 // const socket = io.connect("http://localhost:5000");
@@ -16,7 +15,7 @@ export const JoiningPage = () => {
   const [showChat, setShowChat] = useState(false);
   const [isCreateRoom, setIsCreateRoom] = useState(true);
   const [categoryId, setCategoryId] = useState();
-  const [category , setCategory] = useState("");
+  const [category, setCategory] = useState("");
 
   const joinRoom = () => {
     socket.emit("join_room", { room: room, username: username });
@@ -75,18 +74,11 @@ export const JoiningPage = () => {
                   {isCreateRoom ? (
                     <div id="login-form">
                       <form>
-                        {/* <Link to={"/category"} style={{textDecoration : "none" , color : "inherit"}}>
-                          <div className="choose-category-container">
-                            {category
-                              ? categoryListMap[category]
-                              : "Choose category"}
-                          </div>
-                        </Link> */}
                         <select
                           name="cars"
                           className="choose-category-container"
                           defaultValue="Choose Category"
-                          onChange={(event)=>setCategory(event.target.value)}
+                          onChange={(event) => setCategory(event.target.value)}
                         >
                           <option disabled>Choose Category</option>
                           <option value="0">DSA</option>
