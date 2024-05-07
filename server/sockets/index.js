@@ -1,4 +1,4 @@
-import { questionStoreAptitude, questionsStoreDSA } from "../questions_store/inde.js";
+import { questionStoreAptitude, questionsStoreDSA, questionsStoreJava } from "../questions_store/inde.js";
 import * as utils from "./utils.js";
 
 const socketRoomMap = new Map();
@@ -6,6 +6,7 @@ const socketRoomMap = new Map();
 const quesArr = [
   questionsStoreDSA.questions,
   questionStoreAptitude.questions,
+  questionsStoreJava.questions
 ]
 
 // for join room

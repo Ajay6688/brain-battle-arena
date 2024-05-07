@@ -5,8 +5,8 @@ import io from "socket.io-client";
 import { useState } from "react";
 import { BattleGroundPage } from "./BattleGroundPage";
 
-// const socket = io.connect("http://13.127.235.89:5000");
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("http://13.127.235.89:5000");
+// const socket = io.connect("http://localhost:5000");
 
 export const JoiningPage = () => {
   // const { category } = useParams();
@@ -83,6 +83,7 @@ export const JoiningPage = () => {
                           <option disabled>Choose Category</option>
                           <option value="0">DSA</option>
                           <option value="1">Aptitude</option>
+                          <option value="2">Java</option>
                         </select>
                         <input
                           type="text"
