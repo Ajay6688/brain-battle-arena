@@ -1,5 +1,5 @@
 import "../../../styles/IQTest.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PatternGame = (props) => {
 
@@ -11,13 +11,17 @@ const PatternGame = (props) => {
     };
 
     const getBorderColor = (option) => {
-        return selectedOption === option ? { border: "1px solid #0dcaf0" } : {};
+        return selectedOption === option ? { border: "1px solid #238511" } : {};
     };
+
+    useEffect(()=>{
+        setSelectedOption(null);
+      } , [props.quesNumber]);
 
     return <>
         <div className="outer-iq-game">
             <div className="outer-iq-test-box">
-                {!loadingError ? <img src={props.ques.q} alt="" style={{ width: "100%", height: "100%" }} onError={() => {
+                {!loadingError ? <img src={props.ques.q} alt="question img" style={{ width: "100%", height: "100%" }} onError={() => {
                     console.error("Image failed to load");
                     setLoadingError(true);
                 }} /> : <span>loading...</span>}

@@ -42,6 +42,16 @@ export const questionStoreAptitude = {
       ans: "A",
     },
     {
+      type: "TEXT",
+      time: 30,
+      q: "What is your city name ?",
+      A: "Hyderabad",
+      B: "Nabha",
+      C: "Mumbai",
+      D: "Delhi",
+      ans: "B",
+    },
+    {
       type: "PATTERN",
       time: 30,
       q: "https://f867b987572fb5d41ec60f5cee22021a.cdn.bubble.io/f1619620533832x433131910406034500/Q1.svg",

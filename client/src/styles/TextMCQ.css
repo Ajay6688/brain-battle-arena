@@ -1,0 +1,221 @@
+body {
+    margin: 0px;
+    padding: 0;
+}
+
+:root {
+    --commont-font: "Poppins", sans-serif;
+}
+
+.change-button-color{
+    background: #238511;
+}
+
+.section-3 {
+    width: 100vw;
+    background-image: url(../assets//images//polygonScatterHaikei.svg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+}
+
+.sec-3-main {
+    height: auto;
+    width: 80vw;
+    background: rgba(255, 255, 255, 0.822);
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    position: relative;
+    max-height: 200vh;
+    padding-bottom: 24px;
+    z-index: 1;
+}
+
+.fiirst-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.fiirst-nav span:nth-child(1) {
+    font-family: var(--commont-font);
+    color: #56B945;
+    font-size: 20px;
+    font-weight: 800px;
+
+}
+
+.fiirst-nav .testt span {
+    font-family: var(--commont-font);
+    color: #56B945;
+    font-size: 42px;
+    font-weight: 800px;
+    text-transform: capitalize;
+}
+
+.fiirst-nav span:nth-child(3) {
+    font-family: var(--commont-font);
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: 800px;
+    width: 25%;
+    position: relative;
+}
+
+.ques {
+    width: 400px;
+    display: flex;
+
+}
+
+.testt {
+    width: 555px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+}
+
+.time {
+    width: 400px;
+    display: flex;
+    justify-content: right;
+}
+
+
+.your-name {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+
+}
+
+.your-name div {
+    padding: 10px 24px 10px 24px;
+    background-color: #56B945;
+    color: white;
+    font-family: var(--commont-font);
+    font-size: 40px;
+    border-radius: 20px;
+    max-width: 950px;
+    height: auto;
+    border: none;
+    z-index: 777;
+}
+
+.your-name div h1 {
+    font-size: large;
+}
+
+.first-names {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 177px;
+    margin-top: 20px;
+}
+
+.first-names h1 {
+    padding: 20px;
+    background-color: #56B945;
+    color: white;
+    font-family: var(--commont-font);
+    text-transform: capitalize;
+    border-radius: 15px;
+    font-size: 19px;
+    font-size: 19px;
+    z-index: 777;
+    min-width: 144px;
+}
+
+.last-names {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 177px;
+}
+
+.last-names h1 {
+    padding: 20px;
+    background-color: #56B945;
+    color: white;
+    font-family: var(--commont-font);
+    text-transform: capitalize;
+    border-radius: 15px;
+    font-size: 19px;
+    font-size: 19px;
+    z-index: 777;
+    min-width: 144px;
+}
+
+.last-names h1:hover {
+
+    background-color: #238511;
+
+}
+
+.first-names h1:hover {
+
+    background-color: #238511;
+
+}
+
+.left-imgg {
+
+    position: absolute;
+    left: 0;
+    height: 300px;
+    bottom : 0px;
+}
+
+.right-imgg {
+    position: absolute;
+    right: 0;
+    height: 300px;
+    bottom : 0px;
+}
+
+.sbutton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+}
+
+.sbutton button {
+    padding: 20px 40px 20px 40px;
+    background-color: #238511;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-family: var(--commont-font);
+}
+
+.sbutton button:active {
+    background-color: #0e4705;
+}
+
+@media (max-width:950px) {
+    .left-imgg {
+        height: 300px;
+        top: 300px;
+        left: -50px;
+
+    }
+
+    .right-imgg {
+        height: 300px;
+        top: 300px;
+        right: -70px;
+    }
+}

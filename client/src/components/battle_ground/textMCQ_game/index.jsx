@@ -1,31 +1,36 @@
-import "../../..//styles/IQTest.css"
+import { useEffect, useState } from "react";
+import "../../../styles/TextMCQ.css";
 
 const TextMCQ = (props) => {
 
-    return <div className="outer-iq-game" style={{ flexDirection: "column", alignItems: "center", height: "63vh" }}>
-        <h2 className="mcq-options-row" style={{ width: "76%", padding: "16px" }}>wha is your name :  </h2>
-        <div className="row">
-            <div
-                className="col mcq-options-row"
-                style={{ fontSize: "18px", fontWeight: "500" }}
-                onClick={props.setUserAns.bind(null, "A")}
-            >Ajay</div>
-            <div className="col mcq-options-row"
-                style={{ fontSize: "18px", fontWeight: "500" }}
-                onClick={props.setUserAns.bind(null, "B")}
-            >Abhishek</div>
-            <div className="w-100"></div>
-            <div className="col mcq-options-row"
-                style={{ fontSize: "18px", fontWeight: "500" }}
-                onClick={props.setUserAns.bind(null, "C")}
-            >Hritik</div>
-            <div className="col mcq-options-row"
-                style={{ fontSize: "18px", fontWeight: "500" }}
-                onClick={props.setUserAns.bind(null, "D")}
-            >Siva sai</div>
-        </div>
-    </div>
-}
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    props.setUserAns(option);
+  };
+
+  useEffect(()=>{
+    setSelectedOption(null);
+  } , [props.quesNumber]);
+
+  return (
+    <>
+       <div class="your-name">
+            <div>
+                <h1>{props.ques.q} </h1>
+            </div>
+        </div>
+        <div class="first-names">
+            <h1 onClick={()=>handleOptionClick("A")}  style={selectedOption === "A" ? {background : "#238511"} : {}}>A : {props.ques.A}</h1>
+            <h1 onClick={()=>handleOptionClick("B")}  style={selectedOption === "B" ? {background : "#238511"} : {}}>B : {props.ques.B}</h1>
+        </div>
+        <div class="last-names">
+            <h1 onClick={()=>handleOptionClick("C")} style={selectedOption === "C" ? {background : "#238511"} : {}}>C : {props.ques.C}</h1>
+            <h1 onClick={()=>handleOptionClick("D")} style={selectedOption === "D" ? {background : "#238511"} : {}}>D : {props.ques.D}</h1>
+        </div>
+    </>
+  );
+};
 
 export default TextMCQ;

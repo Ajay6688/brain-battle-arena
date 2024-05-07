@@ -1,11 +1,20 @@
 import "../../styles/IQTest.css";
+import "../../styles/TextMCQ.css";
 import "../../App.css";
 import PatternGame from "./pattern_game";
 import TextMCQ from "./textMCQ_game";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import player1Img from "../../assets/images/player1img.png";
+import player2Img from "../../assets/images/player2img.png";
 
-const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categoryId}) => {
+const QuizBattle = ({
+  socket,
+  username,
+  room,
+  isHost,
+  questionsCategory,
+  categoryId,
+}) => {
   const [quesArr, setQuesArr] = useState([{}]);
   const [quesIndex, setQuesIndex] = useState(0);
   const [quesNumber, setQuesNumber] = useState(1);
@@ -17,38 +26,46 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
   const [user2Submitted, setUser2Submitted] = useState(false);
   const [isWinnerData, setIsWinnerData] = useState({});
   const [buttonBackground, setButtonBackground] = useState({});
+  const [isSubmitButtonClicked, setIsSubmitButtonClicked] = useState(false);
 
   const handleSubmitClick = () => {
-    setUser1Submitted(true);
-    socket.emit("submit_answer", {
-      isAnswerSubmitted: true,
-      username: username,
-      room: room.room,
-      isHost: isHost,
-    });
+    setIsSubmitButtonClicked(true);
+    console.log("is Submit Button Clicked " ,isSubmitButtonClicked);
+    if (!isSubmitButtonClicked) {
+      setUser1Submitted(true);
+      socket.emit("submit_answer", {
+        isAnswerSubmitted: true,
+        username: username,
+        room: room.room,
+        isHost: isHost,
+      });
 
-    if (userAns === quesArr[quesIndex]?.ans) {
-      console.log("correct");
-      setScore((prev) => prev + 1);
-    } else {
-      console.log("wrong");
+      if (userAns === quesArr[quesIndex]?.ans) {
+        console.log("correct");
+        setScore((prev) => prev + 1);
+      } else {
+        console.log("wrong");
+      }
+
+      setButtonBackground({ background: "#a0fab8" });
     }
-    
-    setButtonBackground({ background: "#a0fab8" });
+    return;
   };
+
+  useEffect(()=>{
+    setIsSubmitButtonClicked(false);
+  } , [quesNumber])
 
   // this will run only once so will initialize the
   useEffect(() => {
-    console.log("from route " ,questionsCategory);
-    console.log("categoryId ",categoryId);
-    let category = null; 
-    if(categoryId !== null){
+    let category = null;
+    if (categoryId !== null) {
       category = categoryId;
-    }else{
+    } else {
       category = questionsCategory;
     }
-    console.log("final category " ,category)
-    socket.emit("send_questions", { room: room.room  , category : category});
+    console.log("final category ", category);
+    socket.emit("send_questions", { room: room.room, category: category });
   }, []);
 
   useEffect(() => {
@@ -109,7 +126,135 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
 
   return (
     <>
-      <div>
+      <section class="section-3">
+        <div class="sec-3-main">
+          <img class="left-imgg" src={player1Img} alt="player 1 img" />
+          <img class="right-imgg" src={player2Img} alt="player 2 img" />
+          <div class="fiirst-nav">
+            {!endOfGame && (
+              <div class="ques">
+                <span>
+                  <strong>
+                    {" "}
+                    Q {quesNumber}/{quesArr?.length}{" "}
+                  </strong>
+                </span>
+              </div>
+            )}
+            <div class="testt">
+              {" "}
+              <span>
+                <strong>Brain Battle Arena</strong>{" "}
+              </span>
+            </div>
+            {!endOfGame && (
+              <div class="time">
+                <span>
+                  <strong>Time Left : {timer}</strong>
+                </span>
+              </div>
+            )}
+          </div>
+
+          {!endOfGame && (
+            <>
+              {quesArr[quesIndex]?.type === "PATTERN" ? (
+                <PatternGame
+                  ques={quesArr[quesIndex]}
+                  setQuesIndex={setQuesIndex}
+                  setQuesNumber={setQuesNumber}
+                  setScore={setScore}
+                  handleSubmitClick={handleSubmitClick}
+                  setUserAns={setUserAns}
+                  quesNumber = {quesNumber}
+                />
+              ) : (
+                <TextMCQ
+                  handleSubmitClick={handleSubmitClick}
+                  setUserAns={setUserAns}
+                  ques={quesArr[quesIndex]}
+                  setQuesIndex={setQuesIndex}
+                  setQuesNumber={setQuesNumber}
+                  quesNumber = {quesNumber}
+                />
+              )}
+            </>
+          )}
+
+          {endOfGame && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                marginTop: "3%",
+              }}
+            >
+              <h2
+                style={{
+                  fontFamily: "'Bai Jamjuree', sans-serif",
+                  color: "#56B945",
+                }}
+              >
+                Game is Completed!
+              </h2>
+              <h2
+                style={{
+                  fontFamily: "'Bai Jamjuree', sans-serif",
+                  color: "#56B945",
+                  border: "1px solid black",
+                  padding: "9px",
+                }}
+              >
+                {score > isWinnerData.score
+                  ? "You Won"
+                  : score === isWinnerData.score
+                  ? "It's a Tie"
+                  : "You Lost"}
+              </h2>
+              <h3
+                style={{
+                  fontFamily: "'Bai Jamjuree', sans-serif",
+                  color: "#56B945",
+                }}
+              >
+                Your Score is : {score} / {quesArr?.length} <br />
+                Your Opponent score is : {isWinnerData.score} /{" "}
+                {quesArr?.length}
+              </h3>
+              <div class="sbutton">
+                <button
+                  type="submit"
+                  style={{ background: "#56B945" }}
+                  // style={buttonBackground}
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                >
+                  Home
+                </button>
+              </div>
+            </div>
+          )}
+          {!endOfGame && (
+            <div class="sbutton">
+              <button
+                type="submit"
+                onClick={handleSubmitClick}
+                style={buttonBackground}
+              >
+                submit
+              </button>
+              {user1Submitted && (
+                <p>waiting for opponent to submit the answer</p>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* <div>
         <div className="mainGameTopicContainer">
           <div
             className="mainGameTopicChild"
@@ -223,7 +368,12 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
                 alignItems: "center",
               }}
             ></div>
-            <button className="startButtonContainer" onClick={() => {window.location.reload()}}>
+            <button
+              className="startButtonContainer"
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
               Home
             </button>
           </div>
@@ -234,7 +384,7 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
             display: "flex",
             justifyContent: "center",
             marginTop: "10px",
-            width : "100%"
+            width: "100%",
           }}
         >
           {!endOfGame && (
@@ -253,7 +403,7 @@ const QuizBattle = ({ socket, username, room, isHost , questionsCategory , categ
             </div>
           )}
         </span>
-      </div>
+      </div> */}
     </>
   );
 };
